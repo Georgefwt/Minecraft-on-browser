@@ -63,15 +63,48 @@
 			animate();
 
 			function init() {
-				camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
+				camera = new THREE.PerspectiveCamera( 85, window.innerWidth / window.innerHeight, 1, 1000 );
 				camera.position.y = 10;
 				scene = new THREE.Scene();
-				scene.background = new THREE.Color( 0xffffff );
+				scene.background = new THREE.Color( 0xccffff );
 				scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
 
-				const light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
-				light.position.set( 0.5, 1, 0.75 );
-				scene.add( light );
+				//light*********************************************************************
+				// const light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
+				// light.position.set( 0.5, 1, 0.75 );
+				// scene.add( light );
+				let lightValue = 1;
+				let light1;
+				let light2;
+				let light3;
+
+				let lightHighIntensity = 1;
+				let lightLowIntensity = 0.4;
+
+				function getAmbientLightIntensity() {
+					return Math.min(Math.max(lightLowIntensity, lightValue), lightHighIntensity) * 3 / 4;
+				}
+
+				function getPointLightIntensity() {
+					return Math.min(Math.max(0, lightValue / 5), 0.2);
+				}
+
+				function getDirectionalLightIntensity() {
+					return Math.min(Math.max(lightLowIntensity, lightValue), lightHighIntensity) / 4;
+				}
+				light1 = new THREE.AmbientLight(0xffffff, getAmbientLightIntensity());//环境光。让物体变亮
+				scene.add(light1);
+				light2 = new THREE.PointLight(0xffffff, getPointLightIntensity());//点光。此处仅造阴影用，值大了会让方块变色严重
+				light2.position.set(50, 100, 50);
+				light2.castShadow = true;
+				//设置阴影分辨率
+				light2.shadow.mapSize.width = 1024;
+				light2.shadow.mapSize.height = 1024;
+				scene.add(light2);
+				light3 = new THREE.DirectionalLight(0xffffff, getDirectionalLightIntensity());//平行光。制造明暗面，并不使方块变色严重
+				light3.position.set(50, 50, 50);
+				scene.add(light3);
+				//**************************************************************************
 
 				controls = new PointerLockControls( camera, document.body );
 				const blocker = document.getElementById( 'blocker' );
@@ -117,7 +150,6 @@
 					}
 
 				};
-
 				const onKeyUp = function ( event ) {
 					switch ( event.code ) {
 						case 'ArrowUp':
@@ -241,11 +273,9 @@
 				const time = performance.now();
 				if ( controls.isLocked === true ) {
 					raycaster.ray.origin.copy( controls.getObject().position );
-					raycaster.ray.origin.y -= 10;
+					raycaster.ray.origin.y -= 10;//the distance between eyes and foot
 					const intersections = raycaster.intersectObjects( objects );
-
 					const onObject = intersections.length > 0;
-
 					const delta = ( time - prevTime ) / 1000;
 
 					velocity.x -= velocity.x * 10.0 * delta;
@@ -276,6 +306,8 @@
 						canJump = true;
 					}
 				}
+
+				console.log('x:'+camera.position.x+'  y:'+camera.position.y+'  z:'+camera.position.z);//debug
 
 				prevTime = time;
 				renderer.render( scene, camera );
