@@ -61,7 +61,6 @@ function blockCreator(scene,objects) {//adjust freely for yourself~
             objects
         );
         scene.add( cubebox.block );
-        //objects.push( box );
     }
     //set a standpoint
     let cubebox = new BlockCreator('grassCube',0,0,0,objects);
