@@ -53,7 +53,56 @@ class MCFirstPersonControls {
             this.checkRay.Y0.push(new THREE.Raycaster(new THREE.Vector3(), new THREE.Vector3(0, -1, 0), 0, 4));
         for (let i = 0; i < 4; i++)
             this.checkRay.Y1.push(new THREE.Raycaster(new THREE.Vector3(), new THREE.Vector3(0, 1, 0), 0, 4));
+    }
 
+    addKeyboardControl(MCFcontrols){
+        const onKeyDown = function ( event ) {
+            switch ( event.code ) {
+                case 'ArrowUp':
+                case 'KeyW':
+                    MCFcontrols.moveForward = true;
+                    break;
+                case 'ArrowLeft':
+                case 'KeyA':
+                    MCFcontrols.moveLeft = true;
+                    break;
+                case 'ArrowDown':
+                case 'KeyS':
+                    MCFcontrols.moveBackward = true;
+                    break;
+                case 'ArrowRight':
+                case 'KeyD':
+                    MCFcontrols.moveRight = true;
+                    break;
+                case 'Space':
+                    if (MCFcontrols.canJump) MCFcontrols.velocity.y += Math.sqrt(2 * MCFcontrols.worldOption.g * 7.74 * MCFcontrols.personOption.jumpHeight);
+                    MCFcontrols.canJump = false;
+                    break;
+            }
+        };
+
+        const onKeyUp = function ( event ) {
+            switch ( event.code ) {
+                case 'ArrowUp':
+                case 'KeyW':
+                    MCFcontrols.moveForward = false;
+                    break;
+                case 'ArrowLeft':
+                case 'KeyA':
+                    MCFcontrols.moveLeft = false;
+                    break;
+                case 'ArrowDown':
+                case 'KeyS':
+                    MCFcontrols.moveBackward = false;
+                    break;
+                case 'ArrowRight':
+                case 'KeyD':
+                    MCFcontrols.moveRight = false;
+                    break;
+            }
+        };
+        document.addEventListener( 'keydown', onKeyDown );
+        document.addEventListener( 'keyup', onKeyUp );
     }
 
     update(delta){
@@ -61,7 +110,6 @@ class MCFirstPersonControls {
         {
             this.direction.z = Number(this.moveForward) - Number(this.moveBackward);
             this.direction.x = Number(this.moveRight) - Number(this.moveLeft);
-            console.log(Number(this.moveForward));
             this.direction.normalize(); // this ensures consistent movements in all directions
             let velocityXZMax = this.isRunning ? this.personOption.speedRun : this.personOption.speedWalk;
 
@@ -221,9 +269,7 @@ class MCFirstPersonControls {
                 nextX = Math.max(X0Flat === undefined ? nextX : (X0Flat + this.personOption.thickness / 2 + 0.001), nextX);
                 nextX = Math.min(X1Flat === undefined ? nextX : (X1Flat - this.personOption.thickness / 2 - 0.001), nextX);
                 this.controls.getObject().position.x = nextX
-                // console.log(Z0Flat,Z1Flat,X0Flat,X1Flat)
             }
-            // console.log(this.controls.getObject().position.x,this.controls.getObject().position.y,this.controls.getObject().position.z)
         }
         //垂直方向移动+碰撞检测
         {

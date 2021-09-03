@@ -44,6 +44,7 @@
 		<script type="module">
 			import * as THREE from './build/three.module.js';
 			import { MCFirstPersonControls } from './jsm/controls/MCFirstPersonControls.js';
+			import { blockCreator } from './jsm/blocks/BlockCreator.js'
 			let camera, scene, renderer, MCFcontrols,controls;
 			const objects = [];
 			let prevTime = performance.now();
@@ -52,22 +53,24 @@
 			animate();
 
 			function init() {
+				//basic settings***********************************************************
 				camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 				camera.position.y = 4;
 				scene = new THREE.Scene();
-				scene.background = new THREE.Color( 0xccffff );
+				scene.background = new THREE.Color( 0xbbd3ff );
 				scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
 
 				//light*********************************************************************
 				const light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
 				light.position.set( 0.5, 1, 0.75 );
 				scene.add( light );
-				//**************************************************************************
 
-				//controls = new PointerLockControls( camera, document.body );
+				//controls***********************************************************************
 				MCFcontrols = new MCFirstPersonControls( camera, document.body ,objects,scene);
 				controls=MCFcontrols.controls;
-
+				scene.add( controls.getObject());
+				MCFcontrols.addKeyboardControl(MCFcontrols);
+				//html interaction**************************************************************
 				const blocker = document.getElementById( 'blocker' );
 				const instructions = document.getElementById( 'instructions' );
 
@@ -85,105 +88,15 @@
 					instructions.style.display = '';
 				} );
 
-				scene.add( controls.getObject() );
+				//block settings***************************************************************
+				blockCreator(scene,objects);
 
-				const onKeyDown = function ( event ) {
-					switch ( event.code ) {
-						case 'ArrowUp':
-						case 'KeyW':
-							MCFcontrols.moveForward = true;
-							break;
-						case 'ArrowLeft':
-						case 'KeyA':
-							MCFcontrols.moveLeft = true;
-							break;
-						case 'ArrowDown':
-						case 'KeyS':
-							MCFcontrols.moveBackward = true;
-							break;
-						case 'ArrowRight':
-						case 'KeyD':
-							MCFcontrols.moveRight = true;
-							break;
-						case 'Space':
-							if (MCFcontrols.canJump) MCFcontrols.velocity.y += Math.sqrt(2 * MCFcontrols.worldOption.g * 7.74 * MCFcontrols.personOption.jumpHeight);
-							MCFcontrols.canJump = false;
-							break;
-					}
-				};
-
-				const onKeyUp = function ( event ) {
-					switch ( event.code ) {
-						case 'ArrowUp':
-						case 'KeyW':
-							MCFcontrols.moveForward = false;
-							break;
-						case 'ArrowLeft':
-						case 'KeyA':
-							MCFcontrols.moveLeft = false;
-							break;
-						case 'ArrowDown':
-						case 'KeyS':
-							MCFcontrols.moveBackward = false;
-							break;
-						case 'ArrowRight':
-						case 'KeyD':
-							MCFcontrols.moveRight = false;
-							break;
-					}
-				};
-				document.addEventListener( 'keydown', onKeyDown );
-				document.addEventListener( 'keyup', onKeyUp );
-
-				// floor*************************************************************************************
-
-				// objects**************************************************************************************
-				const boxGeometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
-
-				//let position = boxGeometry.attributes.position;
-
-				//set material of minecraft
-				const Toptexture = THREE.ImageUtils.loadTexture('images/grasstop.jpg');
-				const Sidetexture = THREE.ImageUtils.loadTexture('images/grassside.jpg');
-				const Bottexture = THREE.ImageUtils.loadTexture('images/grassbotton.jpg');
-				Toptexture.magFilter = THREE.NearestFilter;
-				Sidetexture.magFilter = THREE.NearestFilter;
-				Bottexture.magFilter = THREE.NearestFilter;
-
-				const texture6face = [
-					new THREE.MeshPhongMaterial({map:Sidetexture}),
-					new THREE.MeshPhongMaterial({map:Sidetexture}),
-					new THREE.MeshPhongMaterial({map:Toptexture}),
-					new THREE.MeshPhongMaterial({map:Bottexture}),
-					new THREE.MeshPhongMaterial({map:Sidetexture}),
-					new THREE.MeshPhongMaterial({map:Sidetexture}),
-				];
-				const boxMaterial = new THREE.MeshFaceMaterial(texture6face);
-				for ( let i = 0; i < 500; i ++ ) {
-					const box = new THREE.Mesh( boxGeometry, boxMaterial );
-					box.position.x = Math.floor( Math.random() * 20 - 10 ) * 2;
-					box.position.y = Math.floor( Math.random() * 20 ) * 2 ;
-					box.position.z = Math.floor( Math.random() * 20 - 10 ) * 2;
-
-					scene.add( box );
-					objects.push( box );
-				}
-				//set a standpoint
-				const box = new THREE.Mesh( boxGeometry, boxMaterial );
-				box.position.set(0,0,0);
-				scene.add( box );
-				objects.push( box );
-				//*****************
-
-
-
+				//renderer settings and misc*****************
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				document.body.appendChild( renderer.domElement );
-
 				window.addEventListener( 'resize', onWindowResize );
-
 			}
 
 			function onWindowResize() {
