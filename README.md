@@ -7,3 +7,4 @@ mimic Minecraft game on browser using three.js and so on
 - [ ] make user able to place blocks
 - [ ] optimize
 - [ ] add some js confusion features
+- [ ] Function: 【Shift】 for sneak
