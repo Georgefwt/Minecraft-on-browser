@@ -13,8 +13,9 @@ class BlockCreator {
 
             //fix this...need to define the boxMaterial and boxGeometry
         }
-        else if(blocktype=='stone'){
-            //fix this...
+        else if(blocktype=='glass'){
+            boxMaterial = this.textureCreator_glass();
+            boxGeometry = this.geometryCreator_glass();
         }
         //...
         let block = new THREE.Mesh( boxGeometry, boxMaterial );
@@ -64,11 +65,33 @@ class BlockCreator {
     geometryCreator_cobblestone(){
         return new THREE.BoxGeometry( 1, 1, 1 );
     }
+
+    textureCreator_glass(){
+        //set material of minecraft grasscube
+        let texture = new THREE.TextureLoader().load('images/glass.png');
+        let texture_alpha = new THREE.TextureLoader().load('images/glass_alpha.png');
+        texture.magFilter = THREE.NearestFilter;
+
+        let oneinalltexture = [
+            new THREE.MeshStandardMaterial({map:texture,alphaMap:texture_alpha,transparent : true}),
+            new THREE.MeshStandardMaterial({map:texture,alphaMap:texture_alpha,transparent : true}),
+            new THREE.MeshStandardMaterial({map:texture,alphaMap:texture_alpha,transparent : true}),
+            new THREE.MeshStandardMaterial({map:texture,alphaMap:texture_alpha,transparent : true}),
+            new THREE.MeshStandardMaterial({map:texture,alphaMap:texture_alpha,transparent : true}),
+            new THREE.MeshStandardMaterial({map:texture,alphaMap:texture_alpha,transparent : true}),
+        ];
+        return oneinalltexture;
+    }
+    geometryCreator_glass(){
+        return new THREE.BoxGeometry( 1, 1, 1 );
+    }
+
     textureCreator_stone(){
         //fix this...
     }
     //...
 }
+
 
 function blockCreator(scene,objects) {//adjust freely for yourself~
     for ( let i = 0; i < 500; i ++ ) {
@@ -90,13 +113,10 @@ function blockCreator(scene,objects) {//adjust freely for yourself~
     scene.add( cubebox.block );
     cubebox = new BlockCreator('grassCube',1,0,1,objects);
     scene.add( cubebox.block );
-    cubebox = new BlockCreator('grassCube',1,1,1,objects);
+    //Texturewall
+    cubebox = new BlockCreator('cobblestone',2,1,2,objects);
     scene.add( cubebox.block );
-    cubebox = new BlockCreator('grassCube',1,1,2,objects);
-    scene.add( cubebox.block );
-    cubebox = new BlockCreator('grassCube',1,4,2,objects);
-    scene.add( cubebox.block );
-     cubebox = new BlockCreator('cobblestone',1,5,2,objects);
+    cubebox = new BlockCreator('glass',2,1,3,objects);
     scene.add( cubebox.block );
 }
 
