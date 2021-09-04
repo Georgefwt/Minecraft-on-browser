@@ -10,12 +10,13 @@ class BlockCreator {
         else if(blocktype=='cobblestone'){
             boxMaterial = this.textureCreator_cobblestone();
             boxGeometry = this.geometryCreator_cobblestone();
-
-            //fix this...need to define the boxMaterial and boxGeometry
         }
         else if(blocktype=='glass'){
             boxMaterial = this.textureCreator_glass();
             boxGeometry = this.geometryCreator_glass();
+        }
+        else if (blocktype=='stone'){
+            //fix this...
         }
         //...
         let block = new THREE.Mesh( boxGeometry, boxMaterial );
@@ -32,15 +33,15 @@ class BlockCreator {
         Toptexture.magFilter = THREE.NearestFilter;
         Sidetexture.magFilter = THREE.NearestFilter;
         Bottexture.magFilter = THREE.NearestFilter;
-        let texture6face = [
-            new THREE.MeshPhongMaterial({map:Sidetexture}),
-            new THREE.MeshPhongMaterial({map:Sidetexture}),
-            new THREE.MeshPhongMaterial({map:Toptexture}),
-            new THREE.MeshPhongMaterial({map:Bottexture}),
-            new THREE.MeshPhongMaterial({map:Sidetexture}),
-            new THREE.MeshPhongMaterial({map:Sidetexture}),
+        let oneinalltexture = [
+            new THREE.MeshLambertMaterial({map:Sidetexture}),
+            new THREE.MeshLambertMaterial({map:Sidetexture}),
+            new THREE.MeshLambertMaterial({map:Toptexture}),
+            new THREE.MeshLambertMaterial({map:Bottexture}),
+            new THREE.MeshLambertMaterial({map:Sidetexture}),
+            new THREE.MeshLambertMaterial({map:Sidetexture}),
         ];
-        return texture6face;
+        return oneinalltexture;
     }
 
     geometryCreator_grassBlock(){
@@ -53,12 +54,12 @@ class BlockCreator {
         texture.magFilter = THREE.NearestFilter;
 
         let oneinalltexture = [
-            new THREE.MeshStandardMaterial({map:texture}),
-            new THREE.MeshStandardMaterial({map:texture}),
-            new THREE.MeshStandardMaterial({map:texture}),
-            new THREE.MeshStandardMaterial({map:texture}),
-            new THREE.MeshStandardMaterial({map:texture}),
-            new THREE.MeshStandardMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
         ];
         return oneinalltexture;
     }
@@ -73,12 +74,12 @@ class BlockCreator {
         texture.magFilter = THREE.NearestFilter;
 
         let oneinalltexture = [
-            new THREE.MeshStandardMaterial({map:texture,alphaMap:texture_alpha,transparent : true}),
-            new THREE.MeshStandardMaterial({map:texture,alphaMap:texture_alpha,transparent : true}),
-            new THREE.MeshStandardMaterial({map:texture,alphaMap:texture_alpha,transparent : true}),
-            new THREE.MeshStandardMaterial({map:texture,alphaMap:texture_alpha,transparent : true}),
-            new THREE.MeshStandardMaterial({map:texture,alphaMap:texture_alpha,transparent : true}),
-            new THREE.MeshStandardMaterial({map:texture,alphaMap:texture_alpha,transparent : true}),
+            new THREE.MeshLambertMaterial({map:texture,transparent : true}),
+            new THREE.MeshLambertMaterial({map:texture,transparent : true}),
+            new THREE.MeshLambertMaterial({map:texture,transparent : true}),
+            new THREE.MeshLambertMaterial({map:texture,transparent : true}),
+            new THREE.MeshLambertMaterial({map:texture,transparent : true}),
+            new THREE.MeshLambertMaterial({map:texture,transparent : true}),
         ];
         return oneinalltexture;
     }
@@ -87,6 +88,9 @@ class BlockCreator {
     }
 
     textureCreator_stone(){
+        //fix this...
+    }
+    geometryCreator_stone(){
         //fix this...
     }
     //...
@@ -117,6 +121,12 @@ function blockCreator(scene,objects) {//adjust freely for yourself~
     cubebox = new BlockCreator('cobblestone',2,1,2,objects);
     scene.add( cubebox.block );
     cubebox = new BlockCreator('glass',2,1,3,objects);
+    scene.add( cubebox.block );
+    cubebox = new BlockCreator('glass',1,1,3,objects);
+    scene.add( cubebox.block );
+    cubebox = new BlockCreator('glass',2,1,3,objects);
+    scene.add( cubebox.block );
+    cubebox = new BlockCreator('glass',3,1,2,objects);
     scene.add( cubebox.block );
 }
 
