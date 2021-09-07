@@ -7,9 +7,22 @@ class BlockCreator {
             boxMaterial = this.textureCreator_grassBlock();
             boxGeometry = this.geometryCreator_grassBlock();
         }
+        //Ore
        else if(blocktype=='ironore'){
             boxMaterial = this.textureCreator_iron_ore();
             boxGeometry = this.geometryCreator_iron_ore();
+        }
+       else if(blocktype=='coalore'){
+            boxMaterial = this.textureCreator_coal_ore();
+            boxGeometry = this.geometryCreator_coal_ore();
+        }
+       else if(blocktype=='goldore'){
+            boxMaterial = this.textureCreator_gold_ore();
+            boxGeometry = this.geometryCreator_gold_ore();
+        }
+       else if(blocktype=='diamondore'){
+            boxMaterial = this.textureCreator_diamond_ore();
+            boxGeometry = this.geometryCreator_diamond_ore();
         }
         else if(blocktype=='cobblestone'){
             boxMaterial = this.textureCreator_cobblestone();
@@ -26,6 +39,10 @@ class BlockCreator {
         else if(blocktype=='sand'){
             boxMaterial = this.textureCreator_sand();
             boxGeometry = this.geometryCreator_sand();
+        }
+        else if(blocktype=='gravel'){
+            boxMaterial = this.textureCreator_gravel();
+            boxGeometry = this.geometryCreator_gravel();
         }
         else if(blocktype=='oak'){
             boxMaterial = this.textureCreator_oak();
@@ -107,6 +124,63 @@ class BlockCreator {
         return new THREE.BoxGeometry( 1, 1, 1 );
     }
 
+    textureCreator_coal_ore(){
+        //set material of minecraft grasscube
+        let texture = new THREE.TextureLoader().load('images/block/coal_ore.png');
+        texture.magFilter = THREE.NearestFilter;
+
+        let oneinalltexture = [
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+        ];
+        return oneinalltexture;
+    }
+    geometryCreator_coal_ore(){
+        return new THREE.BoxGeometry( 1, 1, 1 );
+    }
+
+    textureCreator_diamond_ore(){
+        //set material of minecraft grasscube
+        let texture = new THREE.TextureLoader().load('images/block/diamond_ore.png');
+        texture.magFilter = THREE.NearestFilter;
+
+        let oneinalltexture = [
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+        ];
+        return oneinalltexture;
+    }
+    geometryCreator_diamond_ore(){
+        return new THREE.BoxGeometry( 1, 1, 1 );
+    }
+
+    textureCreator_gold_ore(){
+        //set material of minecraft grasscube
+        let texture = new THREE.TextureLoader().load('images/block/gold_ore.png');
+        texture.magFilter = THREE.NearestFilter;
+
+        let oneinalltexture = [
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+        ];
+        return oneinalltexture;
+    }
+    geometryCreator_gold_ore(){
+        return new THREE.BoxGeometry( 1, 1, 1 );
+    }
+
     textureCreator_glass(){
         //set material of minecraft grasscube
         let texture = new THREE.TextureLoader().load('images/block/glass.png');
@@ -160,6 +234,24 @@ class BlockCreator {
         return oneinalltexture;
     }
     geometryCreator_sand(){
+        return new THREE.BoxGeometry( 1, 1, 1 );
+    }
+
+    textureCreator_gravel(){
+        let texture = new THREE.TextureLoader().load('images/block/gravel.png');
+        texture.magFilter = THREE.NearestFilter;
+
+        let oneinalltexture = [
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+            new THREE.MeshLambertMaterial({map:texture}),
+        ];
+        return oneinalltexture;
+    }
+    geometryCreator_gravel(){
         return new THREE.BoxGeometry( 1, 1, 1 );
     }
 
@@ -261,21 +353,35 @@ function blockCreator(scene,objects) {//adjust freely for yourself~
     scene.add( cubebox.block );
 
     //Texturewall
-    cubebox = new BlockCreator('cobblestone',2,1,2,objects);
-    scene.add( cubebox.block );
+
     cubebox = new BlockCreator('glowstone',2,1,3,objects);
-    scene.add( cubebox.block );
-    cubebox = new BlockCreator('sand',1,1,3,objects);
-    scene.add( cubebox.block );
-    cubebox = new BlockCreator('glass',2,1,4,objects);
-    scene.add( cubebox.block );
-    cubebox = new BlockCreator('stone',3,1,2,objects);
     scene.add( cubebox.block );
     cubebox = new BlockCreator('oak',4,1,2,objects);
     scene.add( cubebox.block );
-    cubebox = new BlockCreator('dirt',4,1,3,objects);
+    cubebox = new BlockCreator('glass',2,1,4,objects);
     scene.add( cubebox.block );
-    cubebox = new BlockCreator('ironore',3,2,2,objects);
+    //Basic Block 
+    cubebox = new BlockCreator('stone',3,1,2,objects);
+    scene.add( cubebox.block );
+    cubebox = new BlockCreator('cobblestone',3,2,2,objects);
+    scene.add( cubebox.block );
+    cubebox = new BlockCreator('dirt',3,3,2,objects);
+    scene.add( cubebox.block );
+    //Block(With gravity)
+    cubebox = new BlockCreator('sand',3,1,3,objects);
+    scene.add( cubebox.block );
+    cubebox = new BlockCreator('gravel',3,2,3,objects);
+    scene.add( cubebox.block );
+
+
+    //Ore Block
+    cubebox = new BlockCreator('ironore',3,2,1,objects);
+    scene.add( cubebox.block );
+    cubebox = new BlockCreator('goldore',3,1,1,objects);
+    scene.add( cubebox.block );
+    cubebox = new BlockCreator('coalore',3,3,1,objects);
+    scene.add( cubebox.block );
+    cubebox = new BlockCreator('diamondore',3,4,1,objects);
     scene.add( cubebox.block );
 }
 
