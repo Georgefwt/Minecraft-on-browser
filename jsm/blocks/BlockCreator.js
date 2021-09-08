@@ -1,60 +1,60 @@
 import * as THREE from '../../build/three.module.js';
-
+import {SpecialBlockCreator} from './SpecialBlockCreator.js'
 class BlockCreator {
     constructor(blocktype,x,y,z,objects) {
         let boxGeometry,boxMaterial;
         if(blocktype=='grassCube'){
             boxMaterial = this.textureCreator_grassBlock();
-            boxGeometry = this.geometryCreator_grassBlock();
+            boxGeometry = this.geometryCreator_RegularBlock();
         }
         //Ore
        else if(blocktype=='ironore'){
             boxMaterial = this.textureCreator_iron_ore();
-            boxGeometry = this.geometryCreator_iron_ore();
+            boxGeometry = this.geometryCreator_RegularBlock();
         }
        else if(blocktype=='coalore'){
             boxMaterial = this.textureCreator_coal_ore();
-            boxGeometry = this.geometryCreator_coal_ore();
+            boxGeometry = this.geometryCreator_RegularBlock();
         }
        else if(blocktype=='goldore'){
             boxMaterial = this.textureCreator_gold_ore();
-            boxGeometry = this.geometryCreator_gold_ore();
+            boxGeometry = this.geometryCreator_RegularBlock();
         }
        else if(blocktype=='diamondore'){
             boxMaterial = this.textureCreator_diamond_ore();
-            boxGeometry = this.geometryCreator_diamond_ore();
+            boxGeometry = this.geometryCreator_RegularBlock();
         }
         else if(blocktype=='cobblestone'){
             boxMaterial = this.textureCreator_cobblestone();
-            boxGeometry = this.geometryCreator_cobblestone();
+            boxGeometry = this.geometryCreator_RegularBlock();
         }
         else if(blocktype=='glass'){
             boxMaterial = this.textureCreator_glass();
-            boxGeometry = this.geometryCreator_glass();
+            boxGeometry = this.geometryCreator_RegularBlock();
         }
         else if(blocktype=='dirt'){
             boxMaterial = this.textureCreator_dirt();
-            boxGeometry = this.geometryCreator_dirt();
+            boxGeometry = this.geometryCreator_RegularBlock();
         }
         else if(blocktype=='sand'){
             boxMaterial = this.textureCreator_sand();
-            boxGeometry = this.geometryCreator_sand();
+            boxGeometry = this.geometryCreator_RegularBlock();
         }
         else if(blocktype=='gravel'){
             boxMaterial = this.textureCreator_gravel();
-            boxGeometry = this.geometryCreator_gravel();
+            boxGeometry = this.geometryCreator_RegularBlock();
         }
         else if(blocktype=='oak'){
             boxMaterial = this.textureCreator_oak();
-            boxGeometry = this.geometryCreator_oak();
+            boxGeometry = this.geometryCreator_RegularBlock();
         }
         else if(blocktype=='stone'){
             boxMaterial = this.textureCreator_stone();
-            boxGeometry = this.geometryCreator_stone();
+            boxGeometry = this.geometryCreator_RegularBlock();
         }
         else if(blocktype=='glowstone'){
             boxMaterial = this.textureCreator_glowstone();
-            boxGeometry = this.geometryCreator_glowstone();
+            boxGeometry = this.geometryCreator_RegularBlock();
         }
         //...
         let block = new THREE.Mesh( boxGeometry, boxMaterial );
@@ -82,7 +82,7 @@ class BlockCreator {
         return oneinalltexture;
     }
 
-    geometryCreator_grassBlock(){
+    geometryCreator_RegularBlock(){
         return new THREE.BoxGeometry( 1, 1, 1 );
     }
 
@@ -101,10 +101,6 @@ class BlockCreator {
         ];
         return oneinalltexture;
     }
-    geometryCreator_cobblestone(){
-        return new THREE.BoxGeometry( 1, 1, 1 );
-    }
-
     textureCreator_iron_ore(){
         //set material of minecraft grasscube
         let texture = new THREE.TextureLoader().load('images/block/iron_ore.png');
@@ -120,10 +116,6 @@ class BlockCreator {
         ];
         return oneinalltexture;
     }
-    geometryCreator_iron_ore(){
-        return new THREE.BoxGeometry( 1, 1, 1 );
-    }
-
     textureCreator_coal_ore(){
         //set material of minecraft grasscube
         let texture = new THREE.TextureLoader().load('images/block/coal_ore.png');
@@ -138,9 +130,6 @@ class BlockCreator {
             new THREE.MeshLambertMaterial({map:texture}),
         ];
         return oneinalltexture;
-    }
-    geometryCreator_coal_ore(){
-        return new THREE.BoxGeometry( 1, 1, 1 );
     }
 
     textureCreator_diamond_ore(){
@@ -158,9 +147,6 @@ class BlockCreator {
         ];
         return oneinalltexture;
     }
-    geometryCreator_diamond_ore(){
-        return new THREE.BoxGeometry( 1, 1, 1 );
-    }
 
     textureCreator_gold_ore(){
         //set material of minecraft grasscube
@@ -176,9 +162,6 @@ class BlockCreator {
             new THREE.MeshLambertMaterial({map:texture}),
         ];
         return oneinalltexture;
-    }
-    geometryCreator_gold_ore(){
-        return new THREE.BoxGeometry( 1, 1, 1 );
     }
 
     textureCreator_glass(){
@@ -197,9 +180,6 @@ class BlockCreator {
         ];
         return oneinalltexture;
     }
-    geometryCreator_glass(){
-        return new THREE.BoxGeometry( 1, 1, 1 );
-    }
 
     textureCreator_dirt(){
         let texture = new THREE.TextureLoader().load('images/block/dirt.png');
@@ -214,9 +194,6 @@ class BlockCreator {
             new THREE.MeshLambertMaterial({map:texture}),
         ];
         return oneinalltexture;
-    }
-    geometryCreator_dirt(){
-        return new THREE.BoxGeometry( 1, 1, 1 );
     }
 
     textureCreator_sand(){
@@ -233,9 +210,6 @@ class BlockCreator {
         ];
         return oneinalltexture;
     }
-    geometryCreator_sand(){
-        return new THREE.BoxGeometry( 1, 1, 1 );
-    }
 
     textureCreator_gravel(){
         let texture = new THREE.TextureLoader().load('images/block/gravel.png');
@@ -250,9 +224,6 @@ class BlockCreator {
             new THREE.MeshLambertMaterial({map:texture}),
         ];
         return oneinalltexture;
-    }
-    geometryCreator_gravel(){
-        return new THREE.BoxGeometry( 1, 1, 1 );
     }
 
     textureCreator_oak(){
@@ -271,10 +242,6 @@ class BlockCreator {
         ];
         return oneinalltexture;
     }
-    geometryCreator_oak(){
-        return new THREE.BoxGeometry( 1, 1, 1 );
-    }
-
     textureCreator_stone(){
         let texture = new THREE.TextureLoader().load('images/block/stone.png');
         texture.magFilter = THREE.NearestFilter;
@@ -289,10 +256,6 @@ class BlockCreator {
         ];
         return oneinalltexture;
     }
-    geometryCreator_stone(){
-        return new THREE.BoxGeometry( 1, 1, 1 );
-    }
-
 
     textureCreator_glowstone(){
         let texture = new THREE.TextureLoader().load('images/block/glowstone.png');
@@ -308,48 +271,34 @@ class BlockCreator {
         ];
         return oneinalltexture;
     }
-    geometryCreator_glowstone(){
-        return new THREE.BoxGeometry( 1, 1, 1 );
-    }
-
 
 }
 
 
 function blockCreator(scene,objects) {//adjust freely for yourself~
-/*
-    for ( let i = 0; i < 500; i ++ ) {
-        let cubebox = new BlockCreator(
-            'grassCube',
-            Math.floor( Math.random() * 20 - 10 ) * 2,
-            Math.floor( Math.random() * 20 ) * 2 ,
-            Math.floor( Math.random() * 20 - 10 ) * 2,
-            objects
-        );
-        scene.add( cubebox.block );
-    }*/
+    let cubebox;
     for(let j=-15;j<15;j++){
         for(let k=-15;k<15;k++){
-            //if (j ==1){
-                let cubebox = new BlockCreator(
+            if (j === 1){
+                cubebox = new BlockCreator(
                     'grassCube',
                     j,0,k,
                     objects
-                    );              
-              //   } 
-            /*  else{
-                let cubebox = new BlockCreator(
+                    );
+            }
+            else{
+                cubebox = new BlockCreator(
                     'stone',
                      j,0,k,
                     objects
-                    );*/
-            //}
+                    );
+            }
 
             scene.add(cubebox.block);
         }
     } 
     //set a standpoint
-    let cubebox = new BlockCreator('grassCube',2,1,0,objects);
+    cubebox = new BlockCreator('grassCube',2,1,0,objects);
     scene.add( cubebox.block );
 
     //Texturewall
@@ -383,6 +332,12 @@ function blockCreator(scene,objects) {//adjust freely for yourself~
     scene.add( cubebox.block );
     cubebox = new BlockCreator('diamondore',3,4,1,objects);
     scene.add( cubebox.block );
+
+    cubebox = new SpecialBlockCreator('redstone_lamp',5,5,5,objects);
+    scene.add( cubebox.block );
+    cubebox = new SpecialBlockCreator('redstone_lamp',5,7,5,objects);
+    scene.add( cubebox.block );
+    cubebox.TurnOn_redstone_lamp();
 }
 
 export {blockCreator};
