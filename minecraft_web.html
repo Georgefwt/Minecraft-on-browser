@@ -47,6 +47,7 @@
 			import { blockCreator } from './jsm/blocks/BlockCreator.js'
 			let camera, scene, renderer, MCFcontrols,controls;
 			const objects = [];
+			const updatefuncList=[];
 			let prevTime = performance.now();
 
 			init();
@@ -89,7 +90,7 @@
 				} );
 
 				//block settings***************************************************************
-				blockCreator(scene,objects);
+				blockCreator(scene,objects,updatefuncList,controls);
 
 				//renderer settings and misc*****************
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -111,8 +112,10 @@
 				if ( controls.isLocked === true ) {
 					const delta = (time - prevTime) / 1000;
 					MCFcontrols.update(delta);
+					updatefuncList.forEach(function (func) {
+						func();
+					});
 				}
-
 				prevTime = time;
 				renderer.render( scene, camera );
 			}

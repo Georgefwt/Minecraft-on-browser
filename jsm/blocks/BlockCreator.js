@@ -3,56 +3,56 @@ import {SpecialBlockCreator} from './SpecialBlockCreator.js'
 class BlockCreator {
     constructor(blocktype,x,y,z,objects) {
         let boxGeometry,boxMaterial;
-        if(blocktype=='grassCube'){
+        if(blocktype==='grassCube'){
             boxMaterial = this.textureCreator_grassBlock();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
         //Ore
-       else if(blocktype=='ironore'){
+       else if(blocktype==='ironore'){
             boxMaterial = this.textureCreator_iron_ore();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
-       else if(blocktype=='coalore'){
+       else if(blocktype==='coalore'){
             boxMaterial = this.textureCreator_coal_ore();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
-       else if(blocktype=='goldore'){
+       else if(blocktype==='goldore'){
             boxMaterial = this.textureCreator_gold_ore();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
-       else if(blocktype=='diamondore'){
+       else if(blocktype==='diamondore'){
             boxMaterial = this.textureCreator_diamond_ore();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
-        else if(blocktype=='cobblestone'){
+        else if(blocktype==='cobblestone'){
             boxMaterial = this.textureCreator_cobblestone();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
-        else if(blocktype=='glass'){
+        else if(blocktype==='glass'){
             boxMaterial = this.textureCreator_glass();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
-        else if(blocktype=='dirt'){
+        else if(blocktype==='dirt'){
             boxMaterial = this.textureCreator_dirt();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
-        else if(blocktype=='sand'){
+        else if(blocktype==='sand'){
             boxMaterial = this.textureCreator_sand();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
-        else if(blocktype=='gravel'){
+        else if(blocktype==='gravel'){
             boxMaterial = this.textureCreator_gravel();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
-        else if(blocktype=='oak'){
+        else if(blocktype==='oak'){
             boxMaterial = this.textureCreator_oak();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
-        else if(blocktype=='stone'){
+        else if(blocktype==='stone'){
             boxMaterial = this.textureCreator_stone();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
-        else if(blocktype=='glowstone'){
+        else if(blocktype==='glowstone'){
             boxMaterial = this.textureCreator_glowstone();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
@@ -71,7 +71,7 @@ class BlockCreator {
         Toptexture.magFilter = THREE.NearestFilter;
         Sidetexture.magFilter = THREE.NearestFilter;
         Bottexture.magFilter = THREE.NearestFilter;
-        let oneinalltexture = [
+        return [
             new THREE.MeshLambertMaterial({map:Sidetexture}),
             new THREE.MeshLambertMaterial({map:Sidetexture}),
             new THREE.MeshLambertMaterial({map:Toptexture}),
@@ -79,7 +79,6 @@ class BlockCreator {
             new THREE.MeshLambertMaterial({map:Sidetexture}),
             new THREE.MeshLambertMaterial({map:Sidetexture}),
         ];
-        return oneinalltexture;
     }
 
     geometryCreator_RegularBlock(){
@@ -90,8 +89,7 @@ class BlockCreator {
         //set material of minecraft grasscube
         let texture = new THREE.TextureLoader().load('images/block/cobblestone.png');
         texture.magFilter = THREE.NearestFilter;
-
-        let oneinalltexture = [
+        return [
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
@@ -99,14 +97,12 @@ class BlockCreator {
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
         ];
-        return oneinalltexture;
     }
     textureCreator_iron_ore(){
         //set material of minecraft grasscube
         let texture = new THREE.TextureLoader().load('images/block/iron_ore.png');
         texture.magFilter = THREE.NearestFilter;
-
-        let oneinalltexture = [
+        return [
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
@@ -114,14 +110,12 @@ class BlockCreator {
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
         ];
-        return oneinalltexture;
     }
     textureCreator_coal_ore(){
         //set material of minecraft grasscube
         let texture = new THREE.TextureLoader().load('images/block/coal_ore.png');
         texture.magFilter = THREE.NearestFilter;
-
-        let oneinalltexture = [
+        return [
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
@@ -129,15 +123,13 @@ class BlockCreator {
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
         ];
-        return oneinalltexture;
     }
 
     textureCreator_diamond_ore(){
         //set material of minecraft grasscube
         let texture = new THREE.TextureLoader().load('images/block/diamond_ore.png');
         texture.magFilter = THREE.NearestFilter;
-
-        let oneinalltexture = [
+        return [
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
@@ -145,15 +137,13 @@ class BlockCreator {
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
         ];
-        return oneinalltexture;
     }
 
     textureCreator_gold_ore(){
         //set material of minecraft grasscube
         let texture = new THREE.TextureLoader().load('images/block/gold_ore.png');
         texture.magFilter = THREE.NearestFilter;
-
-        let oneinalltexture = [
+        return [
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
@@ -161,7 +151,6 @@ class BlockCreator {
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
         ];
-        return oneinalltexture;
     }
 
     textureCreator_glass(){
@@ -169,8 +158,7 @@ class BlockCreator {
         let texture = new THREE.TextureLoader().load('images/block/glass.png');
        // let texture_alpha = new THREE.TextureLoader().load('images/glass_alpha.png');
         texture.magFilter = THREE.NearestFilter;
-
-        let oneinalltexture = [
+        return [
             new THREE.MeshLambertMaterial({map:texture,transparent : true}),
             new THREE.MeshLambertMaterial({map:texture,transparent : true}),
             new THREE.MeshLambertMaterial({map:texture,transparent : true}),
@@ -178,14 +166,12 @@ class BlockCreator {
             new THREE.MeshLambertMaterial({map:texture,transparent : true}),
             new THREE.MeshLambertMaterial({map:texture,transparent : true}),
         ];
-        return oneinalltexture;
     }
 
     textureCreator_dirt(){
         let texture = new THREE.TextureLoader().load('images/block/dirt.png');
         texture.magFilter = THREE.NearestFilter;
-
-        let oneinalltexture = [
+        return [
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
@@ -193,14 +179,12 @@ class BlockCreator {
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
         ];
-        return oneinalltexture;
     }
 
     textureCreator_sand(){
         let texture = new THREE.TextureLoader().load('images/block/sand.png');
         texture.magFilter = THREE.NearestFilter;
-
-        let oneinalltexture = [
+        return [
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
@@ -208,14 +192,12 @@ class BlockCreator {
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
         ];
-        return oneinalltexture;
     }
 
     textureCreator_gravel(){
         let texture = new THREE.TextureLoader().load('images/block/gravel.png');
         texture.magFilter = THREE.NearestFilter;
-
-        let oneinalltexture = [
+        return [
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
@@ -223,7 +205,6 @@ class BlockCreator {
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
         ];
-        return oneinalltexture;
     }
 
     textureCreator_oak(){
@@ -231,8 +212,7 @@ class BlockCreator {
         let texturetop = new THREE.TextureLoader().load('images/block/oak_log_top.png');
         texture.magFilter = THREE.NearestFilter;
         texturetop.magFilter = THREE.NearestFilter;
-
-        let oneinalltexture = [
+        return [
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texturetop}),
@@ -240,13 +220,11 @@ class BlockCreator {
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
         ];
-        return oneinalltexture;
     }
     textureCreator_stone(){
         let texture = new THREE.TextureLoader().load('images/block/stone.png');
         texture.magFilter = THREE.NearestFilter;
-
-        let oneinalltexture = [
+        return [
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
@@ -254,14 +232,12 @@ class BlockCreator {
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
         ];
-        return oneinalltexture;
     }
 
     textureCreator_glowstone(){
         let texture = new THREE.TextureLoader().load('images/block/glowstone.png');
         texture.magFilter = THREE.NearestFilter;
-
-        let oneinalltexture = [
+        return [
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
@@ -269,13 +245,12 @@ class BlockCreator {
             new THREE.MeshLambertMaterial({map:texture}),
             new THREE.MeshLambertMaterial({map:texture}),
         ];
-        return oneinalltexture;
     }
 
 }
 
 
-function blockCreator(scene,objects) {//adjust freely for yourself~
+function blockCreator(scene,objects,updatefuncList,controls) {//adjust freely for yourself~
     let cubebox;
     for(let j=-15;j<15;j++){
         for(let k=-15;k<15;k++){
@@ -335,9 +310,19 @@ function blockCreator(scene,objects) {//adjust freely for yourself~
 
     cubebox = new SpecialBlockCreator('redstone_lamp',5,5,5,objects);
     scene.add( cubebox.block );
-    cubebox = new SpecialBlockCreator('redstone_lamp',5,7,5,objects);
-    scene.add( cubebox.block );
-    cubebox.TurnOn_redstone_lamp();
+    let lamp = new SpecialBlockCreator('redstone_lamp',5,7,5,objects);
+    scene.add( lamp.block );
+    let plate = new SpecialBlockCreator('pressureplate',4,1,3,objects);
+    scene.add( plate.block );
+
+    //set the activate function when pressure plate is pressed
+    function pressureplateupdate() {
+        if (plate.pressureplate_status(controls)){
+            if (plate.status===true) lamp.TurnOn_redstone_lamp();
+            else lamp.TurnOff_redstone_lamp();
+        }
+    }
+    updatefuncList.push(pressureplateupdate);
 }
 
 export {blockCreator};
