@@ -3,7 +3,7 @@ import {SpecialBlockCreator} from './SpecialBlockCreator.js'
 class BlockCreator {
     constructor(blocktype,x,y,z,objects) {
         let boxGeometry,boxMaterial;
-        if(blocktype==='grassCube'){
+        if(blocktype=='grassBlock'){
             boxMaterial = this.textureCreator_grassBlock();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
@@ -24,7 +24,8 @@ class BlockCreator {
             boxMaterial = this.textureCreator_diamond_ore();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
-        else if(blocktype==='cobblestone'){
+        //Base Block
+        else if(blocktype=='cobblestone'){
             boxMaterial = this.textureCreator_cobblestone();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
@@ -64,7 +65,6 @@ class BlockCreator {
     }
 
     textureCreator_grassBlock(){
-        //set material of minecraft grasscube
         let Toptexture = new THREE.TextureLoader().load('images/block/grasstop.jpg');
         let Sidetexture = new THREE.TextureLoader().load('images/block/grass_block_side.png');
         let Bottexture = new THREE.TextureLoader().load('images/block/grassbotton.jpg');
@@ -86,7 +86,6 @@ class BlockCreator {
     }
 
     textureCreator_cobblestone(){
-        //set material of minecraft grasscube
         let texture = new THREE.TextureLoader().load('images/block/cobblestone.png');
         texture.magFilter = THREE.NearestFilter;
         return [
@@ -99,7 +98,6 @@ class BlockCreator {
         ];
     }
     textureCreator_iron_ore(){
-        //set material of minecraft grasscube
         let texture = new THREE.TextureLoader().load('images/block/iron_ore.png');
         texture.magFilter = THREE.NearestFilter;
         return [
@@ -112,7 +110,6 @@ class BlockCreator {
         ];
     }
     textureCreator_coal_ore(){
-        //set material of minecraft grasscube
         let texture = new THREE.TextureLoader().load('images/block/coal_ore.png');
         texture.magFilter = THREE.NearestFilter;
         return [
@@ -126,7 +123,6 @@ class BlockCreator {
     }
 
     textureCreator_diamond_ore(){
-        //set material of minecraft grasscube
         let texture = new THREE.TextureLoader().load('images/block/diamond_ore.png');
         texture.magFilter = THREE.NearestFilter;
         return [
@@ -140,7 +136,6 @@ class BlockCreator {
     }
 
     textureCreator_gold_ore(){
-        //set material of minecraft grasscube
         let texture = new THREE.TextureLoader().load('images/block/gold_ore.png');
         texture.magFilter = THREE.NearestFilter;
         return [
@@ -154,7 +149,6 @@ class BlockCreator {
     }
 
     textureCreator_glass(){
-        //set material of minecraft grasscube
         let texture = new THREE.TextureLoader().load('images/block/glass.png');
        // let texture_alpha = new THREE.TextureLoader().load('images/glass_alpha.png');
         texture.magFilter = THREE.NearestFilter;
@@ -254,27 +248,24 @@ function blockCreator(scene,objects,updatefuncList,controls) {//adjust freely fo
     let cubebox;
     for(let j=-15;j<15;j++){
         for(let k=-15;k<15;k++){
-            if (j === 1){
-                cubebox = new BlockCreator(
-                    'grassCube',
+            if (j==1|j==0){
+                let cubebox = new BlockCreator(
+                    'stone',
                     j,0,k,
                     objects
-                    );
-            }
-            else{
-                cubebox = new BlockCreator(
-                    'stone',
+                    ); 
+                scene.add(cubebox.block);
+                 } 
+              else{
+                let cubebox = new BlockCreator(
+                    'grassBlock',
                      j,0,k,
                     objects
                     );
-            }
-
-            scene.add(cubebox.block);
+               scene.add(cubebox.block);
+            }     
         }
     } 
-    //set a standpoint
-    cubebox = new BlockCreator('grassCube',2,1,0,objects);
-    scene.add( cubebox.block );
 
     //Texturewall
 

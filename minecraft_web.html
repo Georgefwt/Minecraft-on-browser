@@ -105,11 +105,28 @@
 				scene = new THREE.Scene();
 				scene.background = new THREE.Color( 0xbbd3ff );
 				scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
+				
+				//Sound init
+				const listener = new THREE.AudioListener();
+				camera.add( listener );
+				//Sound
+				var ambientSound=new THREE.Audio(listener);
+
+				var bgm=new THREE.AudioLoader();
+				bgm.load("sounds/Subwoofer Lullaby.mp3",
+					function(buffer){
+						ambientSound.setBuffer(buffer);
+						ambientSound.setLoop(true);
+						ambientSound.play();
+					}
+				);	
 
 				//light*********************************************************************
 				const light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
 				light.position.set( 0.5, 1, 0.75 );
 				scene.add( light );
+				
+				//Status(Waiting to add)
 
 				//controls***********************************************************************
 				MCFcontrols = new MCFirstPersonControls( camera, document.body ,objects,scene);
