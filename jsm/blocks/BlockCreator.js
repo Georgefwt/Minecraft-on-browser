@@ -312,7 +312,7 @@ function blockCreator(scene,objects,updatefuncList,controls) {//adjust freely fo
     scene.add( cubebox.block );
     let lamp = new SpecialBlockCreator('redstone_lamp',5,7,5,objects);
     scene.add( lamp.block );
-    let plate = new SpecialBlockCreator('pressureplate',4,1,3,objects);
+    let plate = new SpecialBlockCreator('pressureplate',7,1,7,objects);
     scene.add( plate.block );
 
     //set the activate function when pressure plate is pressed
