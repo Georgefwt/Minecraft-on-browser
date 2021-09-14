@@ -3,7 +3,7 @@ import {SpecialBlockCreator} from './SpecialBlockCreator.js'
 class BlockCreator {
     constructor(blocktype,x,y,z,objects) {
         let boxGeometry,boxMaterial;
-        if(blocktype=='grassBlock'){
+        if(blocktype==='grassBlock'){
             boxMaterial = this.textureCreator_grassBlock();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
@@ -25,7 +25,7 @@ class BlockCreator {
             boxGeometry = this.geometryCreator_RegularBlock();
         }
         //Base Block
-        else if(blocktype=='cobblestone'){
+        else if(blocktype==='cobblestone'){
             boxMaterial = this.textureCreator_cobblestone();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
@@ -58,7 +58,7 @@ class BlockCreator {
             boxGeometry = this.geometryCreator_RegularBlock();
         }
         //Slab
-        else if(blocktype=='stoneslab'){
+        else if(blocktype==='stoneslab'){
             boxMaterial = this.textureCreator_stoneslab();
             boxGeometry = this.geometryCreator_RegularBlock();
         }
@@ -263,48 +263,66 @@ class BlockCreator {
 
 
 function blockCreator(scene,objects,updatefuncList,controls) {//adjust freely for yourself~
-    let cubebox;
+    let cubebox,cubeboxblock;
+    cubebox = new BlockCreator(
+        'grassBlock',
+        0,0,0,
+        objects
+    );
     for(let x0=-15;x0<15;x0++){
         for(let z0=-15;z0<15;z0++){
-            if (x0==1|x0==0){
-                cubebox = new BlockCreator(
-                    'stone',
-                    x0,0,z0,
-                    objects
-                    ); 
-                scene.add(cubebox.block);
-                 } 
-              else{
-                 cubebox = new BlockCreator(
-                    'grassBlock',
-                    x0,0,z0,
-                    objects
-                    );
-               scene.add(cubebox.block);
-            }     
+             // cubebox = new BlockCreator(
+             //    'grassBlock',
+             //    x0,0,z0,
+             //    objects
+             //    );
+             // scene.add(cubebox.block);
+            cubeboxblock=cubebox.block.clone();
+            cubeboxblock.position.set(x0,0,z0);
+            scene.add(cubeboxblock);
+            objects.push(cubeboxblock);
         }
     } 
 
     //Add a platform
+    cubebox=new BlockCreator(
+        'stoneslab',
+        0,0,0,
+        objects
+    );
+    scene.add(cubebox.block);
     for (let x1=-6;x1>-14;x1--){
          for (let z1=x1+2;z1<=Math.abs(x1+2);z1++){
-            cubebox=new BlockCreator(
-                'stoneslab',
-                x1,5,z1,
-                objects
-             );
-            scene.add(cubebox.block);
+            // cubebox=new BlockCreator(
+            //     'stoneslab',
+            //     x1,5,z1,
+            //     objects
+            //  );
+            // scene.add(cubebox.block);
+             cubeboxblock=cubebox.block.clone();
+             cubeboxblock.position.set(x1,5,z1);
+             scene.add(cubeboxblock);
+             objects.push(cubeboxblock);
         }
     }
     //Add Stone stair
+    cubebox=new BlockCreator(
+        'stone',
+        0,0,0,
+        objects
+    );
     for (let z2=-1;z2<=1;z2++){
          for (let x2=1;x2<=5;x2++){
-            cubebox=new BlockCreator(
-                'stone',
-                -x2,x2,z2,
-                objects
-             );
-            scene.add(cubebox.block);
+            // cubebox=new BlockCreator(
+            //     'stone',
+            //     -x2,x2,z2,
+            //     objects
+            //  );
+            // scene.add(cubebox.block);
+             cubeboxblock=cubebox.block.clone();
+             cubeboxblock.position.set(-x2,x2,z2);
+             scene.add(cubeboxblock);
+             objects.push(cubeboxblock);
         }
     }
     //Texturewall

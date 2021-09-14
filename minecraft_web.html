@@ -5,69 +5,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<link type="text/css" rel="stylesheet" href="main.css">
-		<style>
-			#blocker {
-				position: absolute;
-				width: 100%;
-				height: 100%;
-				background-color: rgba(0,0,0,0.5);
-			}
-			#instructions {
-				width: 100%;
-				height: 100%;
-
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-
-				text-align: center;
-				font-size: 14px;
-				cursor: pointer;
-			}
-			.center{
-				height: 2%;
-				width: 2%;
-				position: fixed;
-				margin: 0;
-				padding: 0;
-				left: 49%;
-				top: 49%;
-				box-sizing: border-box;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-			}
-			.cursor{
-				height: 40px;
-				width: 40px;
-				position: fixed;
-				margin: 0;
-				padding: 0;
-				box-sizing: border-box;
-				opacity: 0.8;
-			}
-			.cursor::after{
-				content: "";
-				display: block;
-				position: absolute;
-				width: 100%;
-				height: 4%;
-				background: rgb(122, 122, 122);
-				top: 48%;
-				right: 0;
-			}
-			.cursor::before{
-				content: "";
-				display: block;
-				position: absolute;
-				width: 4%;
-				height: 100%;
-				background: rgb(122, 122, 122);
-				top: 0;
-				left: 48%;
-			}
-		</style>
 	</head>
 	<body>
 		<div id="blocker">
@@ -110,9 +47,9 @@
 				const listener = new THREE.AudioListener();
 				camera.add( listener );
 				//Sound
-				var ambientSound=new THREE.Audio(listener);
+				let ambientSound=new THREE.Audio(listener);
 
-				var bgm=new THREE.AudioLoader();
+				let bgm=new THREE.AudioLoader();
 				bgm.load("sounds/Subwoofer Lullaby.mp3",
 					function(buffer){
 						ambientSound.setBuffer(buffer);
